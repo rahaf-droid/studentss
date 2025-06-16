@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Registration</title>
+  <style>
+    body {
+      background: linear-gradient(to right, #fbc2eb, #a6c1ee);
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    .form-container {
+      background-color: #ffffffcc;
+      padding: 30px 40px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      width: 350px;
+      text-align: center;
+    }
+
+    h1 {
+      color: #ff69b4;
+      margin-bottom: 20px;
+    }
+
+    input, select, button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      font-size: 15px;
+      font-family: inherit;
+    }
+
+    button {
+      background-color: #ff69b4;
+      color: white;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #ff1493;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h1> Student Registration </h1>
+    <form id="registerForm">
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="email" name="email" placeholder="Email" required>
+      <input type="text" name="phone" placeholder="Phone Number" required>
+      <input type="text" name="parentPhone" placeholder="Parent's Number" required>
+      <input type="text" name="school" placeholder="School" required>
+      <select name="group" required>
+        <option value="">Choose Group</option>
+        <option value="OL">OL </option>
+        <option value="AS">AS </option>
+        <option value="A2">A2 </option>
+      </select>
+
+      <select name="mode" required>
+        <option value="">Online or Offline?</option>
+        <option value="Online ">Online</option>
+        <option value="Offline Brightside">Offline Brightside</option>
+      </select>
+      <button type="submit">Register 💖</button>
+    </form>
+  </div>
+
+  <script>
+    const scriptURL = "https://script.google.com/macros/s/AKfycbwtb4yAkTdcO1SUIoiWZeRZy_kBKLrG2hM1mHDhCyJ2VA0BazoLWuDOLwofEcoCN-26/exec"; // حطي هنا رابط السكربت الصح
+
+    document.getElementById("registerForm").addEventListener("submit", function(e){
+      e.preventDefault();
+
+      const formData = new FormData(this);
+      const data = {};
+      formData.forEach((val, key) => data[key] = val);
+
+      fetch(scriptURL, {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }).then(res => {
+        alert("🎉 Registration successful!");
+        this.reset();
+      }).catch(err => {
+        alert("🚨 Error: Check script URL & Sheet name!");
+        console.error(err);
+      });
+    });
+  </script>
+</body>
+</html>
